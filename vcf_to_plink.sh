@@ -26,6 +26,8 @@ done
 
 #check MAF
 ~/tools/plink2 --bfile alspac_all --freq --out alspac_all
+#output minimum MAF (.frq file has different number of spaces). make sure it's > maf threshold
+cat alspac_all.frq | tail -n +2 | tr -s ' ' | awk '{print $5}' | sort | head -1
 
 ########################just another dataset##############################
 
@@ -45,6 +47,10 @@ done
 rm twins_mergelist.txt
 touch twins_mergelist.txt
 for i in $(seq 22); do
-  echo 'alspac_'$i >> twins_mergelist.txt
+  echo 'twins_'$i >> twins_mergelist.txt
 done
 ~/tools/plink2 --make-bed --merge-list twins_mergelist.txt --out twins_all
+
+#check MAF
+~/tools/plink2 --bfile twins_all --freq --out twins_all
+cat twins_all.frq | tail -n +2 | tr -s ' ' | awk '{print $5}' | sort | head -1
