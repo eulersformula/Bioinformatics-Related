@@ -24,6 +24,9 @@ for i in $(seq 22); do
 done
 ~/tools/plink2 --make-bed --merge-list alspac_mergelist.txt --out alspac_all
 
+#check MAF
+~/tools/plink2 --bfile alspac_all --freq --out alspac_all
+
 ########################just another dataset##############################
 
 base=6607
