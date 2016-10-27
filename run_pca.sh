@@ -12,3 +12,6 @@ thinamt=$(echo "scale=5;150000/${nsnps}" | bc)
 
 # now get the PC's using eigenstrat; assumes that smartpca is in the current dir; use the latest version from http://data.broadinstitute.org/alkesgroup/EIGENSOFT/ can solve the problem of missing libm.so.6 library.
 ~/tools/smartpca_loadings_mod.perl -i ${fname}_sub.eigenstratgeno -a ${fname}_sub.snp -b ${fname}_sub.ind -k $npc -o ${fname}_sub.pca -p ${fname}_sub.plot -e ${fname}_sub.eval -l ${fname}_sub.log -d ${fname}_sub.load -m 5 -t 10 -s 6.0 -g 1
+
+#retain only useful part; also assign both FID and IID for PLINK use
+tail -n +2 ${fname}_sub.pca.evec | awk '{print $1"\t"$1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11}' > ${fname}.pca.evec
