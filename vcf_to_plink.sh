@@ -7,6 +7,8 @@ for i in $(seq 22); do
   #We can use vcftools with the following command but it's just significantly faster with PLINK2. But PLINK2 cannot work with gz files direclty.
   #vcftools --gzvcf $fname --plink --out 'alspac_'$i
   ~/tools/plink2 --vcf $fname --make-bed --maf 0.05 --snps-only --biallelic-only --out 'alspac_'$i 
+  #if to select only a proportion of SNPs based on bps, use
+  #~/tools/plink2 --vcf $fname --make-bed --biallelic-only --chr ${i} --from-bp 59100000 --to-bp 64100000 --out 'alspac_'$i
 done
 
 #renaming name of SNPs without rsid
